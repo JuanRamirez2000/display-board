@@ -1,0 +1,13 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.db
+.env
+
+# Next.js
+.next/
+node_modules/
+
+# VS Code
+.vscode/settings.json
