@@ -4,9 +4,8 @@ import { useState, useCallback } from "react";
 import { HexColorPicker } from "react-colorful";
 
 const GRID_SIZE = 32;
-const TOTAL_PIXELS = GRID_SIZE * GRID_SIZE; // 1024
+const TOTAL_PIXELS = GRID_SIZE * GRID_SIZE;
 
-// Convert hex color (#ff0000) to [R, G, B]
 function hexToRgb(hex: string): [number, number, number] {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
@@ -41,7 +40,7 @@ export default function PixelCanvas() {
 
   const handleSubmit = async () => {
     const pixels = grid.map((hex) => hexToRgb(hex));
-    await fetch("http://localhost:8000/api/submit", {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/submit`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ pixels }),
@@ -72,8 +71,6 @@ export default function PixelCanvas() {
         >
           Erase
         </button>
-
-        {/* Color swatch — click to toggle picker */}
         <div className="relative">
           <div
             onClick={() => setShowPicker((p) => !p)}
